@@ -1,4 +1,5 @@
-#Algorithms
+#Algorithms <br>
+
 This project contains two utility classes <code>sort</code> and <code>search</code> of generic type 
 <code>T</code>. As the name suggests, <code>sort</code> has methods for sorting algorithms, while <code>search</code>
 has methods for searching algorithms. <br>

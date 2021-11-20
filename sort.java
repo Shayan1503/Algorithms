@@ -2,7 +2,7 @@ package Algorithms;
 
 /**
  * @author Shayan Dasgupta
- * @version 1.3
+ * @version 1.4.1
  */
 public class sort<T extends Comparable<T>>
 {
@@ -26,13 +26,12 @@ public class sort<T extends Comparable<T>>
      * Loop invariant: At the start of each <code>for</code> loop the elements of the sub-array
      * <code>A[0...j-1]</code> are originally in positions from 1 to <code>j-1</code> and are in sorted order. <br>
      *
-     * Time Complexity: O(n^2) <br>
+     * Time Complexity: \u0398(n^2) <br>
      * Space Complexity:
      *
-     * @param A Array of type T
-     * @return sorted Array
+     * @param A - Array of type T
      */
-    public T[] insertion(T[] A)
+    public void insertion(T[] A)
     {
 
         int j;
@@ -54,9 +53,7 @@ public class sort<T extends Comparable<T>>
 
         //checking for sorting order
       if(checkOrder())
-          return reverse(A);
-
-      return A;
+          reverse(A);
     }
 
     /**
@@ -67,13 +64,12 @@ public class sort<T extends Comparable<T>>
      * It keeps going on in this fashion till <code>r = n-2</code>. Loop invariant: At the start of each <code>for</code>
      * loop, the sub-array <code>A[0..i-1]</code> contains <code>i</code> smallest elements of the array <code>A</code>.<br>
      *
-     * Time Complexity: O(n^2) <br>
+     * Time Complexity: \u0398(n^2) <br>
      * Space Complexity:
      *
-     * @param A Array of type T
-     * @return sorted Array
+     * @param A - Array of type T
      */
-    public T[] selection(T[] A)
+    public void selection(T[] A)
     {
         int min_pos;
         T temp;
@@ -95,16 +91,92 @@ public class sort<T extends Comparable<T>>
 
         //checking for sorting order
         if(checkOrder())
-            return reverse(A);
-
-        return A;
+            reverse(A);
     }
 
+    /**
+     * MERGE SORT<br>
+     * The algorithm utilises Divide-and-Conquer method for sorting. The original array <code>A</code> is divided into
+     * two halves, those two halves are sorted and then merged together. The real sorting takes place in the method
+     * {@link #merging merging}.
+     *
+     * @param A - Array of type T
+     * @param start - starting point in array to be sorted
+     * @param end - ending point in array to be sorted
+     */
+    public void merge(T[] A, int start, int end)
+    {
+        if(start < end)
+        {
+            //finding mid-section
+            int mid = (start+end)/2;
+
+            //sorting first half
+            merge(A,start,mid);
+
+            //sorting second half
+            merge(A,mid+1, end);
+
+            //merging the two sorted halves
+            merging(A,start,mid,end);
+        }
+    }
+
+    /**
+     * This method merges the two sub-arrays <code>A[p..q]</code> and <code>A[q+1..r]</code>. A <code>while</code> loop
+     * runs and the lesser of the face value of the two sub-arrays is added to <code>A[k]</code>.
+     * In this manner we get a sorted and merged sub-array <br><code>A[q..r]</code>. Loop invariant: At the start of each
+     * <code>for</code> loop the sub-array <code>A[p..k-1]</code> contains k - p of the smallest elements of
+     * <code>L[0..n1]</code> and <code>R[0..n2]</code>.
+     *
+     * @param A - Array of type T
+     * @param p - starting position of sub-array
+     * @param q - middle position of sub-array
+     * @param r - final position of sub-array
+     */
+    private void merging(T[] A, int p, int q, int r)
+    {
+        int n1 = q - p + 1;
+        int n2 = r - q;
+
+        T[] L = (T[]) new Comparable[n1+1];
+        T[] R = (T[]) new Comparable[n2+1];
+
+        //copying values into sub-arrays
+        System.arraycopy(A, p, L, 0, n1);
+        System.arraycopy(A, q+1, R, 0, n2);
+
+        int lIndex = 0, rIndex = 0, k = p;
+
+        while(lIndex < n1 && rIndex < n2)
+        {
+            if(L[lIndex].compareTo(R[rIndex]) <= 0)
+            {
+                A[k] = L[lIndex];
+                lIndex++;
+            }
+            else
+            {
+                A[k] = R[rIndex];
+                rIndex++;
+            }
+            k++;
+        }
+
+        //emptying values of left sub-array
+        while(lIndex < n1)
+            A[k++] = L[lIndex++];
+
+        //emptying values of right sub-array
+        while(rIndex < n2)
+            A[k++] = R[rIndex++];
+    }
     private boolean checkOrder()
     {
         return order.equals("decreasing");
     }
-    private T[] reverse(T[] A)
+
+    private void reverse(T[] A)
     {
         T temp;
         for(int i = 0; i < A.length/2; i++)
@@ -113,8 +185,6 @@ public class sort<T extends Comparable<T>>
             A[i] = A[A.length-i - 1];
             A[A.length-i - 1] = temp;
         }
-
-        return A;
     }
 }
 

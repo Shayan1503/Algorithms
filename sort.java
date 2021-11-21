@@ -2,7 +2,7 @@ package Algorithms;
 
 /**
  * @author Shayan Dasgupta
- * @version 1.4.2
+ * @version 1.4.3
  */
 public class sort<T extends Comparable<T>>
 {
@@ -29,7 +29,7 @@ public class sort<T extends Comparable<T>>
      * Time Complexity: \u0398(n^2) <br>
      * Space Complexity:
      *
-     * @param A - Array of type T
+     * @param A Array of type T
      */
     public void insertion(T[] A)
     {
@@ -67,7 +67,7 @@ public class sort<T extends Comparable<T>>
      * Time Complexity: \u0398(n^2) <br>
      * Space Complexity:
      *
-     * @param A - Array of type T
+     * @param A Array of type T
      */
     public void selection(T[] A)
     {
@@ -103,9 +103,9 @@ public class sort<T extends Comparable<T>>
      * Time Complexity : \u0398(n logn)<br>
      * Space Complexity :
      *
-     * @param A - Array of type T
-     * @param start - starting point in array to be sorted
-     * @param end - ending point in array to be sorted
+     * @param A Array of type T
+     * @param start starting point in array to be sorted
+     * @param end ending point in array to be sorted
      */
     public void merge(T[] A, int start, int end)
     {
@@ -124,7 +124,7 @@ public class sort<T extends Comparable<T>>
             merging(A,start,mid,end);
         }
 
-        if(checkOrder())
+        if((start + end) == A.length - 1 && checkOrder())
             reverse(A);
     }
 
@@ -135,10 +135,10 @@ public class sort<T extends Comparable<T>>
      * <code>for</code> loop the sub-array <code>A[p..k-1]</code> contains k - p of the smallest elements of
      * <code>L[0..n1]</code> and <code>R[0..n2]</code>.
      *
-     * @param A - Array of type T
-     * @param p - starting position of sub-array
-     * @param q - middle position of sub-array
-     * @param r - final position of sub-array
+     * @param A Array of type T
+     * @param p starting position of sub-array
+     * @param q middle position of sub-array
+     * @param r final position of sub-array
      */
     private void merging(T[] A, int p, int q, int r)
     {

@@ -2,7 +2,7 @@ package Algorithms;
 
 /**
  * @author Shayan Dasgupta
- * @version 1.4.1
+ * @version 1.4.2
  */
 public class sort<T extends Comparable<T>>
 {
@@ -98,7 +98,10 @@ public class sort<T extends Comparable<T>>
      * MERGE SORT<br>
      * The algorithm utilises Divide-and-Conquer method for sorting. The original array <code>A</code> is divided into
      * two halves, those two halves are sorted and then merged together. The real sorting takes place in the method
-     * {@link #merging merging}.
+     * {@link #merging merging}.<br>
+     *
+     * Time Complexity : \u0398(n logn)<br>
+     * Space Complexity :
      *
      * @param A - Array of type T
      * @param start - starting point in array to be sorted
@@ -120,6 +123,9 @@ public class sort<T extends Comparable<T>>
             //merging the two sorted halves
             merging(A,start,mid,end);
         }
+
+        if(checkOrder())
+            reverse(A);
     }
 
     /**

@@ -2,7 +2,7 @@ package Algorithms;
 
 /**
  * @author Shayan Dasgupta
- * @version 1.4.3
+ * @version 1.4.4
  */
 public class sort<T extends Comparable<T>>
 {
@@ -31,7 +31,7 @@ public class sort<T extends Comparable<T>>
      *
      * @param A Array of type T
      */
-    public void insertion(T[] A)
+    public void insertionSort(T[] A)
     {
 
         int j;
@@ -69,7 +69,7 @@ public class sort<T extends Comparable<T>>
      *
      * @param A Array of type T
      */
-    public void selection(T[] A)
+    public void selectionSort(T[] A)
     {
         int min_pos;
         T temp;
@@ -98,7 +98,7 @@ public class sort<T extends Comparable<T>>
      * MERGE SORT<br>
      * The algorithm utilises Divide-and-Conquer method for sorting. The original array <code>A</code> is divided into
      * two halves, those two halves are sorted and then merged together. The real sorting takes place in the method
-     * {@link #merging merging}.<br>
+     * {@link #merge merge}.<br>
      *
      * Time Complexity : \u0398(n logn)<br>
      * Space Complexity :
@@ -107,7 +107,7 @@ public class sort<T extends Comparable<T>>
      * @param start starting point in array to be sorted
      * @param end ending point in array to be sorted
      */
-    public void merge(T[] A, int start, int end)
+    public void mergeSort(T[] A, int start, int end)
     {
         if(start < end)
         {
@@ -115,13 +115,13 @@ public class sort<T extends Comparable<T>>
             int mid = (start+end)/2;
 
             //sorting first half
-            merge(A,start,mid);
+            mergeSort(A,start,mid);
 
             //sorting second half
-            merge(A,mid+1, end);
+            mergeSort(A,mid+1, end);
 
             //merging the two sorted halves
-            merging(A,start,mid,end);
+            merge(A,start,mid,end);
         }
 
         if((start + end) == A.length - 1 && checkOrder())
@@ -136,25 +136,25 @@ public class sort<T extends Comparable<T>>
      * <code>L[0..n1]</code> and <code>R[0..n2]</code>.
      *
      * @param A Array of type T
-     * @param p starting position of sub-array
-     * @param q middle position of sub-array
-     * @param r final position of sub-array
+     * @param start starting position of sub-array
+     * @param mid middle position of sub-array
+     * @param end final position of sub-array
      */
-    private void merging(T[] A, int p, int q, int r)
+    private void merge(T[] A, int start, int mid, int end)
     {
-        int n1 = q - p + 1;
-        int n2 = r - q;
+        int len_L = start - mid + 1; //finding the length of left array
+        int len_R = end - mid; //finding the length of right array
 
-        T[] L = (T[]) new Comparable[n1+1];
-        T[] R = (T[]) new Comparable[n2+1];
+        T[] L = (T[]) new Comparable[len_L+1];
+        T[] R = (T[]) new Comparable[len_R+1];
 
         //copying values into sub-arrays
-        System.arraycopy(A, p, L, 0, n1);
-        System.arraycopy(A, q+1, R, 0, n2);
+        System.arraycopy(A, start, L, 0, len_L);
+        System.arraycopy(A, mid+1, R, 0, len_R);
 
-        int lIndex = 0, rIndex = 0, k = p;
+        int lIndex = 0, rIndex = 0, k = start;
 
-        while(lIndex < n1 && rIndex < n2)
+        while(lIndex < len_L && rIndex < len_R)
         {
             if(L[lIndex].compareTo(R[rIndex]) <= 0)
             {
@@ -170,11 +170,11 @@ public class sort<T extends Comparable<T>>
         }
 
         //emptying values of left sub-array
-        while(lIndex < n1)
+        while(lIndex < len_L)
             A[k++] = L[lIndex++];
 
         //emptying values of right sub-array
-        while(rIndex < n2)
+        while(rIndex < len_R)
             A[k++] = R[rIndex++];
     }
     private boolean checkOrder()
@@ -188,8 +188,8 @@ public class sort<T extends Comparable<T>>
         for(int i = 0; i < A.length/2; i++)
         {
             temp = A[i];
-            A[i] = A[A.length-i - 1];
-            A[A.length-i - 1] = temp;
+            A[i] = A[A.length-i-1];
+            A[A.length-i-1] = temp;
         }
     }
 }

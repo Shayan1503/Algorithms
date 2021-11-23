@@ -34,7 +34,7 @@ public class search <T extends Comparable<T>>
 
     /**BINARY SEARCH<br>
      * This algorithm works <strong>only</strong> for arrays that are sorted. Inorder to reduce the burden on the user
-     * to sort the array, the method sorts the array by itself by calling the method {@link sort#merge merge}.
+     * to sort the array, the method sorts the array by itself by calling the method {@link sort#mergeSort mergeSort}.
      * The element at the middle of the array <code>A</code> is checked against the value <code>v</code>.
      * If <code>v</code> is greater than the midpoint then the other half of the array is discarded.
      * We get a new midpoint element and the search begins again. Loop invariant:
@@ -52,7 +52,7 @@ public class search <T extends Comparable<T>>
         sort<T> array_sort = new sort<>();
         T[] copy = (T[]) new Comparable[A.length];
         System.arraycopy(A, 0, copy, 0, A.length);
-        array_sort.merge(copy, 0, copy.length-1);
+        array_sort.mergeSort(copy, 0, copy.length-1);
 
         int Lend = 0, Rend = A.length-1, mid;
 

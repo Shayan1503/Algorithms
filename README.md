@@ -1,11 +1,10 @@
 # Algorithms
 
-This project contains two utility classes <code>sort</code> and <code>search</code> of generic type 
-<code>T</code>. As the name suggests, <code>sort</code> has methods for sorting algorithms, while <code>search</code>
+This project contains two utility classes `sort` and `search` of generic type 
+`T`. As the name suggests, `sort` has methods for sorting algorithms, while `search`
 has methods for searching algorithms. <br>
-Most of my knowledge for these algorithms come from 
-<a href="https://mitpress.mit.edu/books/introduction-algorithms-third-edition" target="_blank">this book</a>.
+Most of my knowledge for these algorithms come from [this book](https://mitpress.mit.edu/books/introduction-algorithms-third-edition)
 <br>
 <br>
 <br>
-All the time complexities mentioned in the <code>javadoc</code> comments are for worst-case.
+All the time complexities mentioned in the `javadoc` comments are for worst-case.

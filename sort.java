@@ -24,7 +24,7 @@ public class sort<T extends Comparable<T>>
      * before it, which are <code>A[0...j-1]</code>. A rearrangement takes place between elements <code>A[0]</code> to
      * <code>A[j]</code>, at the end of which <code>A[j]</code> is placed in the proper position.
      * Loop invariant: At the start of each <code>for</code> loop the elements of the sub-array
-     * <code>A[0...j-1]</code> are originally in positions from 1 to <code>j-1</code> and are in sorted order. <br>
+     * <code>A[0...j-1]</code> are originally in positions from 0 to <code>j-1</code> and are in sorted order. <br>
      *
      * Time Complexity: \u0398(n^2) <br>
      * Space Complexity:

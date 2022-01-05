@@ -98,7 +98,7 @@ public class sort<T extends Comparable<T>>
      * MERGE SORT<br>
      * The algorithm utilises Divide-and-Conquer method for sorting. The original array <code>A</code> is divided into
      * two halves, those two halves are sorted and then merged together. The real sorting takes place in the method
-     * {@link #merge merge}.<br>
+     * {@link #merge merge} while merging.<br>
      *
      * Time Complexity : \u0398(n logn)<br>
      * Space Complexity :

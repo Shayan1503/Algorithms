@@ -142,7 +142,7 @@ public class sort<T extends Comparable<T>>
      */
     private void merge(T[] A, int start, int mid, int end)
     {
-        int len_L = start - mid + 1; //finding the length of left array
+        int len_L = mid - start + 1; //finding the length of left array
         int len_R = end - mid; //finding the length of right array
 
         T[] L = (T[]) new Comparable[len_L+1];

@@ -1,14 +1,84 @@
 package Algorithms.DataStructures;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Graph {
     private ArrayList<Vertex> vertices; // adjacency list
-    private int length;
+    private boolean directed;
+//    private int length;
 
-    Graph() {
+    /**
+     * Default constructor <br>
+     * Initializing ArrayList of vertices and defaulting the graph as an undirected graph.
+     */
+    public Graph() {
         vertices = new ArrayList<>();
-        length = 0;
+        directed = false;
+    }
+
+    /**
+     * Parameterized constructor <br>
+     * Parses a string describing a graph to construct the graph data structure. <br>
+     * Example of what the string of should look like : <br>
+     * 3 --> number of vertices<br>
+     * A --> vertices<br>
+     * B <br>
+     * C <br>
+     * A B --> edges; in case of a directed graph, the direction of edge moves from A to B
+     * C B <br>
+     *
+     * @param data String containing the details of a graph
+     */
+    public Graph(String data) {
+        this();
+        String[] lines = data.split("\n");
+        int V = Integer.parseInt(lines[0]);
+        int i = 1;
+
+        // adding vertices
+        for (; i <= V; i++) {
+            addVertex(lines[i]);
+        }
+
+        // adding edges
+        for (; i < lines.length; i++) {
+            String v = String.valueOf(lines[i].charAt(0));
+            String u = String.valueOf(lines[i].charAt(2));
+            addEdge(v, u);
+        }
+    }
+
+    /**
+     * Parameterized constructor<br>
+     * This is a temporary constructor. Works similar to {@link #Graph(String) Graph}, except it also decides if the
+     * graph will be directed or not.
+     *
+     * @param data String containing details of a graph
+     * @param directed true if graph is directed; false otherwise
+     */
+    public Graph(String data, boolean directed) {
+        this();
+        this.directed = directed;
+        String[] lines = data.split("\n");
+        int V = Integer.parseInt(lines[0]);
+        int i = 1;
+
+        for (; i <= V; i++) {
+            addVertex(lines[i]);
+        }
+
+        for (; i < lines.length; i++) {
+            String v = String.valueOf(lines[i].charAt(0));
+            String u = String.valueOf(lines[i].charAt(2));
+
+            if(directed) {
+                Vertex v1 = vertices.get(indexOf(v));
+                v1.children = new Child(u, v1.children);
+            } else {
+                addEdge(v, u);
+            }
+        }
     }
 
     /**
@@ -19,7 +89,6 @@ public class Graph {
     public void addVertex(String v) {
         if (!containsVertex(v)) {
             vertices.add(new Vertex(v));
-            length++;
         }
     }
 
@@ -119,7 +188,7 @@ public class Graph {
      * @return length of the adjacency list or cardinality of vertex set
      */
     public int getLength() {
-        return length;
+        return vertices.size();
     }
 
     /**
@@ -148,4 +217,22 @@ public class Graph {
 
         return vertices.get(index);
     }
+
+    /**
+     * Returns a <code>String</code> array of vertices
+     *
+     * @return String array
+     */
+    public String[] getVertexArray() {
+        String[] V = new String[vertices.size()];
+
+        int i = 0;
+        for (Vertex v : vertices) {
+            V[i] = v.getName();
+            i++;
+        }
+        return V;
+    }
+
+    public boolean isDirected() { return directed;}
 }
